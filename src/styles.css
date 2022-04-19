@@ -1,7 +1,9 @@
 body {
   font-family: sans-serif;
 }
-
+.container {
+  margin-left: 500px;
+}
 input {
   border-radius: 16px;
   border: none;

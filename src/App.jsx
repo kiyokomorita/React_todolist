@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import "./styles.css";
-import { InputTodo } from "./components/InputTodo";
-import { IncompleteTodos } from "./components/IncompleteTodos";
-import { CompleteTodos } from "./components/CompleteTodos";
+import React, { useState } from 'react';
+import './styles.css';
+import { InputTodo } from './components/InputTodo';
+import { IncompleteTodos } from './components/IncompleteTodos';
+import { CompleteTodos } from './components/CompleteTodos';
 
 export const App = () => {
-  const [todoText, setTodoText] = useState("");
+  const [todoText, setTodoText] = useState('');
   const [incompleteTodos, setIncompleteTodos] = useState([]);
   const [completeTodos, setCompleteTodos] = useState([]);
   const onChangeTodoText = (event) => setTodoText(event.target.value);
   const onClickAdd = () => {
-    if (todoText === "") return;
+    if (todoText === '') return;
     const newTodos = [...incompleteTodos, todoText];
     setIncompleteTodos(newTodos);
-    setTodoText("");
+    setTodoText('');
   };
   const onClickDelete = (index) => {
     const newTodos = [...incompleteTodos];
@@ -40,22 +40,26 @@ export const App = () => {
   };
   return (
     <>
-      <InputTodo
-        todoText={todoText}
-        onChange={onChangeTodoText}
-        onClick={onClickAdd}
-        disabled={incompleteTodos.length >= 5}
-      />
-      {incompleteTodos.length >= 5 && (
-        <p style={{ color: "red" }}>You can update upto 5. Finish your task.</p>
-      )}
+      <div className="container">
+        <InputTodo
+          todoText={todoText}
+          onChange={onChangeTodoText}
+          onClick={onClickAdd}
+          disabled={incompleteTodos.length >= 5}
+        />
+        {incompleteTodos.length >= 5 && (
+          <p style={{ color: 'red' }}>
+            You can update upto 5. Finish your task.
+          </p>
+        )}
 
-      <IncompleteTodos
-        todos={incompleteTodos}
-        onClickComplete={onClickComplete}
-        onClickDelete={onClickDelete}
-      />
-      <CompleteTodos todos={completeTodos} onClickBack={onClickBack} />
+        <IncompleteTodos
+          todos={incompleteTodos}
+          onClickComplete={onClickComplete}
+          onClickDelete={onClickDelete}
+        />
+        <CompleteTodos todos={completeTodos} onClickBack={onClickBack} />
+      </div>
     </>
   );
 };
